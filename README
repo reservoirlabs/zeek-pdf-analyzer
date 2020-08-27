@@ -1,14 +1,18 @@
-Zeek (Bro) PDF File Analyzer
+Bro PDF File Analyzer
 ============================
 
-[![Build Status](https://img.shields.io/travis/fkmclane/bro-pdf-analyzer.svg)](https://travis-ci.org/fkmclane/bro-pdf-analyzer)
+This is a derivative work of the PDF analyzer found at https://github.com/lilyinstarlight/bro-pdf-analyzer
 
-A PDF file analyzer for Zeek (Bro) that exposes PDF data such as version, objects, JavaScript, and pages to scripts.
+A PDF file analyzer for Bro that exposes PDF data such as version, objects, JavaScript, and pages to scripts.
+
+Additions to the original work include:
+
+- PDF body text extraction
+- Embedded file extraction
+- Embedded urls extraction
+- Extensions to PDF info record
+- Documentation
 
 
-Usage
------
+This plugin relies on libpodofo 0.9.5 which must be installed
 
-```sh
-$ bro-pkg install https://github.com/fkmclane/bro-pdf-analyzer.git
-```
