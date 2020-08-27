@@ -1,0 +1,19 @@
+## Generated on seeing a file with mimetype 'application/pdf'
+##
+## f: File object
+## info: Record containing PDF header and body data
+##
+event pdf_info%(f: fa_file, info: PDF::Info%);
+
+## Generated on seeing a PDF with size > PDF::MAX_SIZE
+##
+## f: File object
+##
+event pdf_too_large%(f: fa_file%);
+
+## Generated on a PDF parsing error
+##
+## f: File object
+## e: PDF error code 
+##
+event pdf_error%(f: fa_file, e: PDF::Error%);

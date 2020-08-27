@@ -1,0 +1,3 @@
+127.0.0.1	8000	PDF::PDF_JavaScript_Found	JavaScript found in PDF	-
+127.0.0.1	8000	PDF::PDF_Too_Large	PDF found that is too large to analyze	-
+127.0.0.1	8000	PDF::PDF_Error	PDF found with an error PDF::NO_XREF	-

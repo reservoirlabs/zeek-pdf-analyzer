@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Hooks to add custom options to the configure script.
+#
+
+plugin_usage()
+{
+    cat <<EOF
+    --with-podofo=DIR          Path to PoDoFo installation
+EOF
+}
+
+plugin_option()
+{
+    case "$1" in
+        --with-podofo=*)
+            append_cache_entry PODOFO_ROOT_DIR PATH $optarg
+            return 0
+            ;;
+
+        *)
+            return 1;
+            ;;
+    esac
+}

@@ -1,0 +1,14 @@
+Zeek (Bro) PDF File Analyzer
+============================
+
+[![Build Status](https://img.shields.io/travis/fkmclane/bro-pdf-analyzer.svg)](https://travis-ci.org/fkmclane/bro-pdf-analyzer)
+
+A PDF file analyzer for Zeek (Bro) that exposes PDF data such as version, objects, JavaScript, and pages to scripts.
+
+
+Usage
+-----
+
+```sh
+$ bro-pkg install https://github.com/fkmclane/bro-pdf-analyzer.git
+```
