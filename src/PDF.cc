@@ -321,14 +321,14 @@ bool PDF::AnalyzePDF(const string buf) {
     RecordVal * allowed = new RecordVal(BifType::Record::PDF::Allowed);
 
     // fill in record with TYPE_BOOL values
-    allowed->Assign(0, new Val(doc.IsPrintAllowed(), TYPE_BOOL)); 
-    allowed->Assign(1, new Val(doc.IsEditAllowed(), TYPE_BOOL));
-    allowed->Assign(2, new Val(doc.IsCopyAllowed(), TYPE_BOOL));
-    allowed->Assign(3, new Val(doc.IsEditNotesAllowed(), TYPE_BOOL));
-    allowed->Assign(4, new Val(doc.IsFillAndSignAllowed(), TYPE_BOOL));
-    allowed->Assign(5, new Val(doc.IsAccessibilityAllowed(), TYPE_BOOL));
-    allowed->Assign(6, new Val(doc.IsDocAssemblyAllowed(), TYPE_BOOL));
-    allowed->Assign(7, new Val(doc.IsHighPrintAllowed(), TYPE_BOOL));
+    allowed->Assign(0, val_mgr->GetBool(doc.IsPrintAllowed())); 
+    allowed->Assign(1, val_mgr->GetBool(doc.IsEditAllowed()));
+    allowed->Assign(2, val_mgr->GetBool(doc.IsCopyAllowed()));
+    allowed->Assign(3, val_mgr->GetBool(doc.IsEditNotesAllowed()));
+    allowed->Assign(4, val_mgr->GetBool(doc.IsFillAndSignAllowed()));
+    allowed->Assign(5, val_mgr->GetBool(doc.IsAccessibilityAllowed()));
+    allowed->Assign(6, val_mgr->GetBool(doc.IsDocAssemblyAllowed()));
+    allowed->Assign(7, val_mgr->GetBool(doc.IsHighPrintAllowed()));
 
     // Create a table value (no yield meaning it is a set)
     TypeList * ext_tl = new TypeList(BifType::Record::PDF::Extension);
@@ -342,7 +342,7 @@ bool PDF::AnalyzePDF(const string buf) {
         // fill in namespace, base version, and extension level
         extension->Assign(0, new StringVal(ext.getNamespace()));
         extension->Assign(1, new StringVal(getVersionString(ext.getBaseVersion())));
-        extension->Assign(2, new Val(ext.getLevel(), TYPE_INT));
+        extension->Assign(2, val_mgr->GetInt(ext.getLevel()));
 
         // assign extension to set (yield is nullptr because this is a set)
         extensions->Assign(extension, nullptr);
@@ -377,11 +377,11 @@ bool PDF::AnalyzePDF(const string buf) {
 
     // assign values
     info->Assign(0, new StringVal(getVersionString(doc.GetPdfVersion())));
-    info->Assign(1, new Val(doc.GetPageCount(), TYPE_COUNT));
-    info->Assign(2, new Val(files, TYPE_BOOL));
-    info->Assign(3, new Val(javascript, TYPE_BOOL));
-    info->Assign(4, new Val(doc.GetEncrypted(), TYPE_BOOL));
-    info->Assign(5, new Val(doc.IsLinearized(), TYPE_BOOL));
+    info->Assign(1, val_mgr->GetCount(doc.GetPageCount()));
+    info->Assign(2, val_mgr->GetBool(files));
+    info->Assign(3, val_mgr->GetBool(javascript));
+    info->Assign(4, val_mgr->GetBool(doc.GetEncrypted()));
+    info->Assign(5, val_mgr->GetBool(doc.IsLinearized()));
     info->Assign(6, allowed);
     info->Assign(7, extensions);
     info->Assign(8, new StringVal(pdfBody));

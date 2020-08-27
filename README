@@ -1,9 +1,9 @@
-Bro PDF File Analyzer
+Zeek PDF File Analyzer
 ============================
 
 This is a derivative work of the PDF analyzer found at https://github.com/lilyinstarlight/bro-pdf-analyzer
 
-A PDF file analyzer for Bro that exposes PDF data such as version, objects, JavaScript, and pages to scripts.
+A PDF file analyzer for Zeek that exposes PDF data such as version, objects, JavaScript, and pages to scripts.
 
 Additions to the original work include:
 
@@ -14,5 +14,5 @@ Additions to the original work include:
 - Documentation
 
 
-This plugin relies on libpodofo 0.9.5 which must be installed
+This plugin relies on libpodofo 0.9.6 which must be installed
 
