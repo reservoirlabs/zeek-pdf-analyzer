@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(ZeekPDFAnalyzer)
 
+set(CMAKE_CXX_FLAGS "-Wfatal-errors ${CMAKE_CXX_FLAGS}")
+
 include(ZeekPlugin)
 
 find_package(PoDoFo)

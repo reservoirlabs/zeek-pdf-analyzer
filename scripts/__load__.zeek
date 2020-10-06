@@ -4,4 +4,4 @@
 # always execute unconditionally at that time.
 #
 
-@load ./init.bro
+@load ./init.zeek
