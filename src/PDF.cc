@@ -1,5 +1,7 @@
 #include <file_analysis/Manager.h>
+#include <Type.h>
 #include "PDF.h"
+#include "broker/Data.h"
 
 using namespace file_analysis;
 
@@ -290,7 +292,7 @@ bool PDF::AnalyzePDF(const string buf) {
 
     } catch (const PoDoFo::PdfError & err) {
         // send error to Bro scripts
-        BifEvent::generate_pdf_error((analyzer::Analyzer *)this, GetFile()->GetVal()->Ref(), new EnumVal(convertError(err.GetError()), BifType::Enum::PDF::Error));
+        BifEvent::generate_pdf_error((analyzer::Analyzer *)this, GetFile()->GetVal()->Ref(), BifType::Enum::PDF::Error->GetVal(convertError(err.GetError())));
     }
 
     // bail if document failed to load
@@ -331,9 +333,11 @@ bool PDF::AnalyzePDF(const string buf) {
     allowed->Assign(7, val_mgr->GetBool(doc.IsHighPrintAllowed()));
 
     // Create a table value (no yield meaning it is a set)
-    TypeList * ext_tl = new TypeList(BifType::Record::PDF::Extension);
-    ext_tl->Append(BifType::Record::PDF::Extension);
-    TableVal * extensions = new TableVal(new SetType(ext_tl, 0));
+    TypeList * ext_tl = new TypeList(zeek::BifType::Record::PDF::Extension);
+    auto set_index = zeek::make_intrusive<TypeList>(ext_tl->AsTypeList()->GetPureType());
+    set_index->Append(zeek::BifType::Record::PDF::Extension);
+    auto set_index_intrusive = zeek::make_intrusive<SetType>(std::move(set_index), nullptr);
+    auto extensions = zeek::make_intrusive<zeek::TableVal>(std::move(set_index_intrusive));
 
     for (const PoDoFo::PdfExtension & ext : doc.GetPdfExtensions()) {
         // create extension record type
@@ -357,7 +361,7 @@ bool PDF::AnalyzePDF(const string buf) {
         }
     } catch (const PoDoFo::PdfError & err) {
         // send error to Bro scripts
-        BifEvent::generate_pdf_error((analyzer::Analyzer *)this, GetFile()->GetVal()->Ref(), new EnumVal(convertError(err.GetError()), BifType::Enum::PDF::Error));
+        BifEvent::generate_pdf_error((analyzer::Analyzer *)this, GetFile()->GetVal()->Ref(), BifType::Enum::PDF::Error->GetVal(convertError(err.GetError())));
     }
     
     string pdfURLs; 

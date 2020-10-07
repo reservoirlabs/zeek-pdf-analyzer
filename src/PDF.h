@@ -19,6 +19,8 @@
 #undef IsString
 #include <podofo.h>
 
+using namespace std;
+
 namespace file_analysis {
     class PDF : public file_analysis::Analyzer {
         public:
