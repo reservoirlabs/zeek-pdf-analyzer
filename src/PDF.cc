@@ -395,6 +395,8 @@ bool PDF::AnalyzePDF(const string buf) {
     // send event to Bro scripts
     BifEvent::generate_pdf_info((analyzer::Analyzer *)this, GetFile()->GetVal()->Ref(), info);
 
+    delete ext_tl;
+
     return true;
 }
 

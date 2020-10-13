@@ -1,8 +1,9 @@
 [package]
-description = a PDF file analyzer for Zeek
-tags = bro plugin, file analyzer, pdf
+description = A PDF file analyzer for Zeek
+tags = Zeek plugin, file analyzer, pdf
 script_dir = scripts/Analyzer/PDF
 build_command = ./configure && make
+test_command = cd tests && btest
 user_vars =
   PODOFO_PREFIX [/usr/include] "PoDoFo install prefix"
 external_depends =
